@@ -1,11 +1,9 @@
 package br.com.alura.screenmatch.modelos;
 
-import com.google.gson.annotations.SerializedName;
+import br.com.alura.screenmatch.excecao.ErroDeConversaoAnoException;
 
 public class Titulo implements  Comparable<Titulo>{
-    @SerializedName("Title")
     private String nome;
-    @SerializedName("Year")
     private int anoDeLancamento;
     private boolean incluidoNoPlano;
     private double somaDasAvaliacoes;
@@ -19,6 +17,9 @@ public class Titulo implements  Comparable<Titulo>{
 
     public Titulo(TituloOmdb meuTituloOmdb) {
         this.nome = meuTituloOmdb.title();
+        if (meuTituloOmdb.year().length() > 4){
+            throw new ErroDeConversaoAnoException("Ano inválido: não foi possível converter para inteiro.");
+        }
         this.anoDeLancamento = Integer.valueOf(meuTituloOmdb.year().substring(0,3));
         this.duracaoEmMinutos = Integer.valueOf(meuTituloOmdb.runtime().substring(0,2));
 
