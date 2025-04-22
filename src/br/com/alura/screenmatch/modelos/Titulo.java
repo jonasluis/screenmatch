@@ -20,8 +20,8 @@ public class Titulo implements  Comparable<Titulo>{
         if (meuTituloOmdb.year().length() > 4){
             throw new ErroDeConversaoAnoException("Ano inválido: não foi possível converter para inteiro.");
         }
-        this.anoDeLancamento = Integer.valueOf(meuTituloOmdb.year().substring(0,3));
-        this.duracaoEmMinutos = Integer.valueOf(meuTituloOmdb.runtime().substring(0,2));
+        this.anoDeLancamento = Integer.valueOf(meuTituloOmdb.year().substring(0,4));
+        this.duracaoEmMinutos = Integer.valueOf(meuTituloOmdb.runtime().substring(0,3));
 
     }
 
