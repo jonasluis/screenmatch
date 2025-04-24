@@ -1,15 +1,19 @@
-![thumbnail-Formação Java (4)](https://user-images.githubusercontent.com/66698429/226751112-f79aaa28-16c9-4561-8a15-0ac62ec9cb44.png)
 
+![thumbnail-Formação Java](https://github.com/jacqueline-oliveira/3257-java-screenmatch-com-spring/assets/66698429/003b13b6-b795-4f7b-9f3d-f1e758db3b85)
 
-# Java: consumindo uma API, gravando arquivos e lidando com erros
+# Java: trabalhando com lambdas, streams e Spring Framework
 
-Projeto desenvolvido no quarto curso da formação Java da Alura
+Projeto desenvolvido no primeiro curso da formação Avançando com Java da Alura
 
 
 ## 🔨 Objetivos do projeto
 
-- Aprender a consumir uma API HTTP em Java;
-- Entender como receber e converter dados no formato JSON; 
-- Utilizar a biblioteca externa GSON para fazer serialização e desserialização de dados;
-- Lidar com erros e tratar exceções;
-- Conhecer o pacote java.io para manipulação de arquivos.
+- Criar o projeto ScreenMatch desde o início já utilizando o Spring Framework, inicialmente com linha de comando;
+- Utilizar o Maven como gerenciador de dependências;
+- Utilizar o Jackson para desserialização dos dados;
+- Modelar as abstraçoes da aplicação através de records, classes, atributos e métodos; 
+- Consumir uma API para buscar os dados de séries, temporadas e episódios;
+- Trabalhar com coleções e entender a fundo o uso das funções lambdas;
+- Conhecer a API de Streams e aplicar operações intermediárias como filter, sorted, map, flatMap, peek, entre outras;
+- Transformar streams em novas listas e mapas;
+- Gerar estatísticas personalizadas na aplicação.
