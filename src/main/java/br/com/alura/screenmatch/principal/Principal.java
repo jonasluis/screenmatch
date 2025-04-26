@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.principal;
 
+import br.com.alura.screenmatch.model.DadoEpisodio;
 import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoApi;
@@ -20,20 +21,35 @@ public class Principal {
         System.out.println("Digite o nome da série para buscar: ");
         var nomeSerie = scanner.nextLine();
 
+        // Monta a URL da API, substituindo espaços por '+' e adicionando a chave da API
         String json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
 
+        // Converte o JSON recebido para um objeto da classe DadosSerie
         DadosSerie dadosSerie = converteDados.obterDados(json, DadosSerie.class);
 
+        // Mostra as informações básicas da série
         System.out.println(dadosSerie);
 
+        // Cria uma lista para armazenar os dados de todas as temporadas
         List<DadosTemporada> temporadas = new ArrayList<>();
 
+        // Faz uma busca para cada temporada da série (começando da temporada 1)
         for (int i = 1; i < dadosSerie.totalTemporadas(); i++) {
-            json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+")+"&season=" + i + API_KEY);
+            // Monta a URL para buscar os dados da temporada específica
+            json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + "&season=" + i + API_KEY);
+
+            // Converte o JSON da temporada em um objeto DadosTemporada
             DadosTemporada dadosTemporada = converteDados.obterDados(json, DadosTemporada.class);
+
+            // Adiciona a temporada na lista
             temporadas.add(dadosTemporada);
         }
+
+        // Exibe no console todas as temporadas e seus dados
         temporadas.forEach(System.out::println);
+
+        // Para cada temporada, percorre todos os episódios e imprime o título de cada episódio
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
     }
 
