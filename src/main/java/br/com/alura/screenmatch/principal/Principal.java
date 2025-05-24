@@ -4,25 +4,29 @@ import br.com.alura.screenmatch.model.*;
 import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
+@Component
 public class Principal {
     private Scanner scanner = new Scanner(System.in);
     private ConsumoApi consumoApi = new ConsumoApi();
     private ConverteDados converteDados = new ConverteDados();
     private final String ENDERECO = "http://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=777ff11c";
-    private SerieRepository repositorio;
+
+    private final SerieRepository repositorio;
+
+    @Autowired
+    public Principal(SerieRepository repositorio) {
+        this.repositorio = repositorio;
+    }
 
     private  List<DadosSerie> dadosSeries = new ArrayList<>();
 
-    public Principal(SerieRepository repository) {
-        this.repositorio = repositorio;
-    }
+
 
     public void exibeMenu() {
         var opcao = -1;
@@ -30,7 +34,7 @@ public class Principal {
             var menu = """
                     1 - Buscar séries
                     2 - Buscar episódios
-                    3 - Busacar series Buscadas
+                    3 - Buscar series Buscadas
                     
                     0 - Sair                                 
                     """;
@@ -59,9 +63,7 @@ public class Principal {
     }
 
     private void listarSerieBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream().map(d -> new Serie(d))
-                .collect(Collectors.toList());
+        List<Serie> series = repositorio.findAll();
         series.stream().sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
     }
