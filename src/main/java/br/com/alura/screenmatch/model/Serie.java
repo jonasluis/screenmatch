@@ -24,7 +24,7 @@ public class Serie {
   private String atores;
   private String poster;
   private String sinopse;
-  @Transient
+  @OneToMany(mappedBy = "serie")
   private List<Episodio> episodios = new ArrayList<>();
 
   public Serie() {}
@@ -101,6 +101,14 @@ public class Serie {
 
   public void setSinopse(String sinopse) {
     this.sinopse = sinopse;
+  }
+
+  public List<Episodio> getEpisodios() {
+    return episodios;
+  }
+
+  public void setEpisodios(List<Episodio> episodios) {
+    this.episodios = episodios;
   }
 
   @Override
