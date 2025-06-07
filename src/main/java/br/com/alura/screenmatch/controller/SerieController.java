@@ -3,6 +3,7 @@ package br.com.alura.screenmatch.controller;
 import br.com.alura.screenmatch.dto.SerieDTO;
 import br.com.alura.screenmatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class SerieController {
   private SerieRepository repository;
 
   @GetMapping()
-  public List<SerieDTO> olaMundo(){
+  public List<SerieDTO> obterSeries(){
     return repository.findAll()
             .stream()
             .map(s -> new SerieDTO(
