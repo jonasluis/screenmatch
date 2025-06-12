@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/series")
@@ -49,4 +47,8 @@ public class SerieController {
      return serieService.obterTemporadaPorNumero(id, numero);
   }
 
+  @GetMapping("/categoria/{nomeGenero}")
+  public List<SerieDTO> obterSeriesPorCategoria(@PathVariable String nomeGenero){
+    return serieService.obterSeriesPorCategoria(nomeGenero);
+  }
 }
