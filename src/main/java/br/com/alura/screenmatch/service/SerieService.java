@@ -41,7 +41,7 @@ public class SerieService {
   }
 
   public List<SerieDTO> obterLancamentos() {
-    return converteDados(repository.findTop5ByOrderByEpisodiosDataLancamentoDesc());
+    return converteDados(repository.lancamentosMaisRecentes());
   }
 
   public SerieDTO obterSeriePorId(Long id) {
@@ -70,6 +70,13 @@ public class SerieService {
     }
     return null;
 
+  }
+
+  public List<EpisodioDTO> obterTemporadaPorNumero(Long id, Long numero) {
+    return repository.obterEpisodiosPorTemporada(id, numero)
+            .stream()
+            .map(e -> new EpisodioDTO(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo()))
+            .collect(Collectors.toList());
   }
 }
 
